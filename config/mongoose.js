@@ -7,11 +7,12 @@ require ('dotenv').config ()
 
 const dbConection = async() =>{
     try{
-        await mongoose.conect (MONGO_URI)
+        await mongoose.connect (MONGO_URI)
+        console.log('Conectado a BBDD')
     }catch (error){
         console.error (error)
     }
 }
 
 
-module.exports =dbConection
+module.exports = dbConection
