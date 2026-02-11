@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const productController= require ('../controllers/productControllers')
 
 // GET /products: Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
-router.get ('/products', (req, res)=>{
-    res.send ('Todos los productos')
-})
+router.get ('/products', productController.showProducts)
+
 // GET /products/:productId: Devuelve el detalle de un producto.
 router.get ('/products/:productId', (req, res)=>{
     res.send ('Producto por Id')
@@ -20,9 +20,7 @@ router.get ('/dashboard/new', (req, res)=>{
 })
 
 // POST /dashboard: Crea un nuevo producto.
-router.post('/dashboard', (req, res)=>{
-    res.send ('Crear nuevo producto')
-})
+router.post('/dashboard', productController.createProduct)
 
 // GET /dashboard/:productId: Devuelve el detalle de un producto en el dashboard.
 router.get ('/dashboard/:productId', (req, res)=>{
