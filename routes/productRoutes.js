@@ -6,9 +6,8 @@ const productController= require ('../controllers/productControllers')
 router.get ('/products', productController.showProducts)
 
 // GET /products/:productId: Devuelve el detalle de un producto.
-router.get ('/products/:productId', (req, res)=>{
-    res.send ('Producto por Id')
-})
+router.get ('/products/:productId', productController.showProductById)
+
 // GET /dashboard: Devuelve el dashboard del administrador. En el dashboard aparecerán todos los artículos que se hayan subido. Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.
 router.get ('/dashboard', (req, res)=>{
     res.send ('Todos los artículos(admin)')

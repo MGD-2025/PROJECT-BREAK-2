@@ -19,14 +19,43 @@ const productController ={
                     <a href="/products/${product._id}">Ver detalle</a>
                     </div>
                     `;
-  }
-  res.send(html);
+    }
+            res.send(html);
 
         }catch (error){
             console.error(error)
             res.status(500).json('Error')
         }
     },
+
+    showProductById: async (req, res) =>{
+        try{
+            const id = req.params.productId
+            const products = await Product.findById(id)
+            console.log(products)
+            let html = '';
+                html += `
+                    <div class="product-card">
+                    
+                    <h2>${products.Nombre}</h2>
+                    <img src="${products.Imagen}" alt="${products.Nombre}">
+                    <p>${products.Descripción}</p>
+                    <p>${products.Talla}</p>
+                    <p>${products.Precio}€</p>
+                    <p>${products.Categoría}</p>
+                    <a href="/products/${products._id}">Ver detalle</a>
+                    </div>
+                    `;
+
+            res.send(html);
+
+        }catch (error){
+            console.error(error)
+            res.status(500).json('Error')
+        }
+    },
+  
+
     createProduct: async (req, res) =>{
         try{
             console.log ('BODY', req.body)
