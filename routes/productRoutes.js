@@ -14,9 +14,7 @@ router.get ('/dashboard', (req, res)=>{
 })
 
 // GET /dashboard/new: Devuelve el formulario para subir un artículo nuevo.
-router.get ('/dashboard/new', (req, res)=>{
-    res.send ('subir artículo nuevo')
-})
+router.get ('/dashboard/new', productController.showNewProduct)
 
 // POST /dashboard: Crea un nuevo producto.
 router.post('/dashboard', productController.createProduct)
