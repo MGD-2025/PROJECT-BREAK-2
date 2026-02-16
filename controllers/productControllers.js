@@ -99,12 +99,59 @@ const productController ={
     createProduct: async (req, res) =>{
         try{
             const products = await Product.create(req.body)
+            res.redirect('dashboard')
             res.send(products)
+        }catch (error){
+            console.error(error)
+            res.status(500).json('Error')
+            res.send('Error al añadir producto')
+        }
+    },
+
+    showEditProduct: async (req, res) =>{
+        try{
+            const id = req.params.productId
+            const products = await Product.findById(id)
+            let html = '';
+            html += `
+            <div class="editproduct-card">
+            <form action="/dashboard" method="POST">
+                <label>Nombre producto</label><br>
+                <input type="text" name="Nombre" value=${products.Nombre}><br><br>
+                <label>Descripción</label><br>
+                <textarea name="Descripción">value=${products.Descripción}</textarea><br><br>
+                <label>Talla</label><br>
+                <select name="Talla" value=${products.Talla}>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select><br><br>
+                <label>Precio</label><br>
+                <input type="number" name="Precio" value ${products.Precio}<br><br>
+                <label>Categoría</label><br>
+                <select name="Categoría" value=${products.Categoría}>
+                    <option value="Camisetas">Camisetas</option>
+                    <option value="Pantalones">Pantalones</option>
+                    <option value="Zapatos">Zapatos</option>
+                    <option value="Accesorios">Accesorios</option>
+                </select><br><br>
+                <label>Imagen URL</label><br>
+                <input type="text" name="Imagen"><br><br>
+                <button type="submit">Guardar</button>
+            </form>
+            </div>
+        `;
+
+            res.send(html);
+
         }catch (error){
             console.error(error)
             res.status(500).json('Error')
         }
     }
+
 }
 
 module.exports = productController

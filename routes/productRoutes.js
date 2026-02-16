@@ -3,12 +3,13 @@ const router = express.Router()
 const productController= require ('../controllers/productControllers')
 
 // GET /products: Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
-router.get ('/products', productController.showProducts)
+router.get ('/', productController.showProducts)
 
 // GET /products/:productId: Devuelve el detalle de un producto.
 router.get ('/products/:productId', productController.showProductById)
 
-// GET /dashboard: Devuelve el dashboard del administrador. En el dashboard aparecerán todos los artículos que se hayan subido. Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.
+// GET /dashboard: Devuelve el dashboard del administrador. En el dashboard aparecerán todos los artículos que se hayan subido.
+//  Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.
 router.get ('/dashboard', (req, res)=>{
     res.send ('Todos los artículos(admin)')
 })
@@ -25,9 +26,7 @@ router.get ('/dashboard/:productId', (req, res)=>{
 })
 
 // GET /dashboard/:productId/edit: Devuelve el formulario para editar un producto.
-router.get ('/dashboard/:productId/edit', (req, res)=>{
-    res.send ('Editar un producto (admin)')
-})
+router.get ('/dashboard/:productId/edit', productController.showEditProduct)
 
 // PUT /dashboard/:productId: Actualiza un producto.
 router.put ('/dashboard/:productId', (req, res)=>{
