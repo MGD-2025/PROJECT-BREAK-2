@@ -59,11 +59,23 @@ const productController ={
          let html = '';
             html += `
             <div class="newproduct-card">
+            <h2> Crear producto </h2>        
             <form action="/dashboard" method="POST">
-                <label>Nombre producto</label><br>
+                <label>Nombre</label><br>
                 <input type="text" name="Nombre"><br><br>
                 <label>Descripción</label><br>
                 <textarea name="Descripción"></textarea><br><br>
+                <label>Precio</label><br>
+                <input type="number" name="Precio"><br><br>
+                <label>Imagen URL</label><br>
+                <input type="text" name="Imagen"><br><br>
+                <label>Categoría</label><br>
+                <select name="Categoría">
+                    <option value="Camisetas">Camisetas</option>
+                    <option value="Pantalones">Pantalones</option>
+                    <option value="Zapatos">Zapatos</option>
+                    <option value="Accesorios">Accesorios</option>
+                </select><br><br>
                 <label>Talla</label><br>
                 <select name="Talla">
                     <option value="XS">XS</option>
@@ -72,18 +84,7 @@ const productController ={
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select><br><br>
-                <label>Precio</label><br>
-                <input type="number" name="Precio"><br><br>
-                <label>Categoría</label><br>
-                <select name="Categoría">
-                    <option value="Camisetas">Camisetas</option>
-                    <option value="Pantalones">Pantalones</option>
-                    <option value="Zapatos">Zapatos</option>
-                    <option value="Accesorios">Accesorios</option>
-                </select><br><br>
-                <label>Imagen URL</label><br>
-                <input type="text" name="Imagen"><br><br>
-                <button type="submit">Guardar</button>
+                <button type="submit">Crear</button>
             </form>
             </div>
         `;
@@ -99,8 +100,8 @@ const productController ={
     createProduct: async (req, res) =>{
         try{
             const products = await Product.create(req.body)
-            res.redirect('dashboard')
-            res.send(products)
+            res.redirect('/dashboard')
+
         }catch (error){
             console.error(error)
             res.status(500).json('Error')
@@ -115,6 +116,7 @@ const productController ={
             let html = '';
             html += `
             <div class="editproduct-card">
+            
             <form action="/dashboard" method="POST">
                 <label>Nombre producto</label><br>
                 <input type="text" name="Nombre" value=${products.Nombre}><br><br>
