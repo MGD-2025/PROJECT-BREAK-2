@@ -117,7 +117,7 @@ const productController ={
             html += `
             <div class="editproduct-card">
             
-            <form action="/dashboard" method="POST">
+            <form action="/dashboard/update/${products._id}" method="POST">
                 <label>Nombre producto</label><br>
                 <input type="text" name="Nombre" value=${products.Nombre}><br><br>
                 <label>Descripción</label><br>
@@ -152,7 +152,18 @@ const productController ={
             console.error(error)
             res.status(500).json('Error')
         }
-    }
+    },
+    updateProduct: async (req, res) =>{
+        try{
+            const id = req.params.productId
+            const products = await Product.findByIdAndUpdate(id, req.body)
+            res.redirect('/dashboard')
+
+        }catch (error){
+            console.error(error)
+            res.status(500).json('Error')
+        }
+    },
 
 }
 
