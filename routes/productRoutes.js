@@ -10,9 +10,7 @@ router.post('/dashboard', productController.createProduct)
 
 // GET /dashboard: Devuelve el dashboard del administrador. En el dashboard aparecerán todos los artículos que se hayan subido.
 //  Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.
-router.get ('/dashboard', (req, res)=>{
-    res.send ('Todos los artículos(admin)')
-})
+router.get ('/dashboard', productController.showProduct)
 
 // GET /products/:productId: Devuelve el detalle de un producto.
 router.get ('/products/:productId', productController.showProductById)
@@ -34,8 +32,6 @@ router.get ('/dashboard/:productId/edit', productController.showEditProduct)
 router.post ('/dashboard/update/:productId', productController.updateProduct)
 
 // DELETE /dashboard/:productId/delete: Elimina un producto.
-router.delete ('/dashboard/:productId/delete', (req, res)=>{
-    res.send ('Eliminar un producto (admin)')
-})
+router.delete ('/dashboard/:productId/delete', productController.deleteProduct)
 
 module.exports = router
