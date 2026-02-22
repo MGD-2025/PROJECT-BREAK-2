@@ -121,7 +121,9 @@ const productController ={
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select><br><br>
-                <button type="submit">Crear</button>
+                <a href="/dashboard/new">
+                <button>Crear</button>
+                </a>
             </form>
             </div>
         `;
@@ -159,9 +161,12 @@ const productController ={
                     <p>${product.Talla}</p>
                     <p>${product.Precio}€</p>
                     <p>${product.Categoría}</p>
-                    <a href="/products/${product._id}">Ver detalle</a>
-                    <button type="submit">Actualizar</button>
-                    <button type="reset">Eliminar</button>
+                    <a href="/dashboard/${product._id}/edit">
+                    <button>Actualizar</button>
+                    </a>
+                    <form action="/dashboard/delete/${product._id}" method="POST">
+                    <button type="submit">Eliminar</button>
+                    </form>
                     </div>
                     `;
     }
@@ -249,7 +254,7 @@ const productController ={
             let html = getNavBar(req)
             html+= `<h2>${categoria}</h1>`
             for (let product of products){
-                html += ` 
+                html += `<link rel="stylesheet" href="/styles.css">
                 <div class = "categorproduct-card">
                 <h2>${product.Nombre}</h2>
                 <img src="/img/${product.Imagen}" alt="${product.Nombre}">
