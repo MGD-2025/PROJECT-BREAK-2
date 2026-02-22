@@ -2,16 +2,29 @@
 const Product = require ('../models/Product')
 const getNavBar = require ('../helpers/getNavBar')
 
+const images = {
+     Camiseta: 'img/camisetaarcoiris.png',
+     Pantalón: 'img/pantalónflores.png',
+     Sandalias : 'img/sandalias.png',
+     Sudaderarosa: 'img/sudadera.png',
+     Short: 'img/short.png',
+     Zapatillasblancas: 'img/zapatillas.png',
+     Pendientesflor: 'img/pendientes.png',
+     Gafas: 'img/gafas.png'
+
+}
+
+
 const productController ={
     showProducts: async (req, res) =>{
         try{
             const products = await Product.find()
             let html = getNavBar(req);
             for (let product of products) {
-                html += `
+                html += `<link rel="stylesheet" href="/styles.css">
                     <div class="product-card">
                     <h2>${product.Nombre}</h2>
-                    <img src="${product.Imagen}" alt="${product.Nombre}">
+                    <img src="/img/${product.Imagen}" alt="${product.Nombre}">
                     <p>${product.Descripción}</p>
                     <p>${product.Talla}</p>
                     <p>${product.Precio}€</p>
@@ -33,10 +46,10 @@ const productController ={
             const id = req.params.productId
             const products = await Product.findById(id)
             let html = getNavBar(req);
-                html += `
+                html += `<link rel="stylesheet" href="/styles.css">
                     <div class="product-card">
                     <h2>${products.Nombre}</h2>
-                    <img src="${products.Imagen}" alt="${products.Nombre}">
+                    <img src="/img/${products.Imagen}" alt="${products.Nombre}">
                     <p>${products.Descripción}</p>
                     <p>${products.Talla}</p>
                     <p>${products.Precio}€</p>
@@ -57,10 +70,10 @@ const productController ={
             const id = req.params.productId
             const products = await Product.findById(id)
             let html = getNavBar(req);
-                html += `
+                html += `<link rel="stylesheet" href="/styles.css">
                     <div class="adminproduct-card">
                     <h2>${products.Nombre}</h2>
-                    <img src="${products.Imagen}" alt="${products.Nombre}">
+                    <img src="/img/${product.Imagen}"alt="${products.Nombre}">
                     <p>${products.Descripción}</p>
                     <p>${products.Talla}</p>
                     <p>${products.Precio}€</p>
@@ -81,7 +94,7 @@ const productController ={
     showNewProduct: async (req, res) =>{
         try{
          let html = getNavBar(req);
-            html += `
+            html += `<link rel="stylesheet" href="/styles.css">
             <div class="newproduct-card">
             <h2> Crear producto </h2>        
             <form action="/dashboard" method="POST">
@@ -138,10 +151,10 @@ const productController ={
             const products = await Product.find()
             let html = getNavBar(req);
             for (let product of products) {
-                html += `
+                html += `<link rel="stylesheet" href="/styles.css">
                     <div class="product-card">
                     <h2>${product.Nombre}</h2>
-                    <img src="${product.Imagen}" alt="${product.Nombre}">
+                    <img src="/img/${product.Imagen}" alt="${product.Nombre}">
                     <p>${product.Descripción}</p>
                     <p>${product.Talla}</p>
                     <p>${product.Precio}€</p>
@@ -165,9 +178,8 @@ const productController ={
             const id = req.params.productId
             const products = await Product.findById(id)
             let html = getNavBar(req);
-            html += `
+            html += `<link rel="stylesheet" href="/styles.css">
             <div class="editproduct-card">
-            
             <form action="/dashboard/update/${products._id}" method="POST">
                 <label>Nombre producto</label><br>
                 <input type="text" name="Nombre" value=${products.Nombre}><br><br>
@@ -240,7 +252,7 @@ const productController ={
                 html += ` 
                 <div class = "categorproduct-card">
                 <h2>${product.Nombre}</h2>
-                <img src="${product.Imagen}" alt="${product.Nombre}">
+                <img src="/img/${product.Imagen}" alt="${product.Nombre}">
                 <a href="/products/${product._id}">Ver</a>
                 </div>
                 `

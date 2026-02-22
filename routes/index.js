@@ -8,5 +8,4 @@ const productRoutes = require('./productRoutes')
 router.use ('/', productRoutes )
 router.use ('/dashboard', authRoutes )
 
-
 module.exports = router

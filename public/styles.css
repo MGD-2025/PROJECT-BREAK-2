@@ -1,1 +1,26 @@
 /*Aquí irán las CSS del proyecto */
+
+.getNavBar{
+    background:grey;
+    padding:15px;
+    display:flex;
+    gap:25px;
+    justify-content:center;
+}
+
+.getNavBar a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+.product-card{
+    background:beige;
+    width:260px;
+    padding:15px;
+    margin:20px;
+    border-radius:12px;
+    text-align:center;
+
+}

@@ -8,7 +8,7 @@ const validCategory = ['Camisetas', 'Pantalones', 'Zapatos', 'Accesorios'];
 const productSchema = new mongoose.Schema({
   Nombre:  { type: String, required: true },
   Descripción: {type:String, required:true}, 
-  Imagen:{type:String, required:false},
+  Imagen:{type:String, required:true},
   Categoría: {type:String, enum:validCategory, required:true},
   Talla: {type:String, enum:validSize, required:true},
   Precio: { type: Number, required: true, min: 0 },
