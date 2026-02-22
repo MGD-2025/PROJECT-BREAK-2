@@ -1,5 +1,11 @@
+const getNavBar = (req) =>{
 
-const getNavBar = () =>{
+    let authLink = `<a href="/login">Login</a>`
+
+    if(req.session && req.session.user){
+        authLink = `<a href="/logout">Logout</a>`
+    }
+
     return `
         <div class='getNavBar'>
             <a href="/">Productos</a>

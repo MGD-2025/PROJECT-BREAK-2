@@ -6,7 +6,7 @@ const productController ={
     showProducts: async (req, res) =>{
         try{
             const products = await Product.find()
-            let html = getNavBar();
+            let html = getNavBar(req);
             for (let product of products) {
                 html += `
                     <div class="product-card">
@@ -32,7 +32,7 @@ const productController ={
         try{
             const id = req.params.productId
             const products = await Product.findById(id)
-            let html = getNavBar();
+            let html = getNavBar(req);
                 html += `
                     <div class="product-card">
                     <h2>${products.Nombre}</h2>
@@ -56,7 +56,7 @@ const productController ={
         try{
             const id = req.params.productId
             const products = await Product.findById(id)
-            let html = getNavBar();
+            let html = getNavBar(req);
                 html += `
                     <div class="adminproduct-card">
                     <h2>${products.Nombre}</h2>
@@ -80,7 +80,7 @@ const productController ={
 
     showNewProduct: async (req, res) =>{
         try{
-         let html = getNavBar();
+         let html = getNavBar(req);
             html += `
             <div class="newproduct-card">
             <h2> Crear producto </h2>        
@@ -125,7 +125,7 @@ const productController ={
         try{
             const products = await Product.create(req.body)
             res.redirect('/dashboard')
-            getNavBar()
+            getNavBar(req)
 
         }catch (error){
             console.error(error)
@@ -136,7 +136,7 @@ const productController ={
     showProduct: async (req, res) =>{
         try{
             const products = await Product.find()
-            let html = getNavBar();
+            let html = getNavBar(req);
             for (let product of products) {
                 html += `
                     <div class="product-card">
@@ -164,7 +164,7 @@ const productController ={
         try{
             const id = req.params.productId
             const products = await Product.findById(id)
-            let html = getNavBar();
+            let html = getNavBar(req);
             html += `
             <div class="editproduct-card">
             
@@ -209,7 +209,7 @@ const productController ={
             const id = req.params.productId
             const products = await Product.findByIdAndUpdate(id, req.body)
             res.redirect('/dashboard')
-            getNavBar()
+            getNavBar(req)
 
         }catch (error){
             console.error(error)
@@ -221,7 +221,7 @@ const productController ={
             const id = req.params.productId
             const products = await Product.findByIdAndDelete(id, req.body)
             res.redirect('/dashboard')
-            getNavBar()
+            getNavBar(req)
 
         }catch (error){
             console.error(error)
@@ -234,7 +234,7 @@ const productController ={
             let categoria = req.params.Nombre
             categoria = categoria.charAt(0).toUpperCase() + categoria.slice(1)
             const products = await Product.find({Categoría: categoria})
-            let html = getNavBar()
+            let html = getNavBar(req)
             html+= `<h2>${categoria}</h1>`
             for (let product of products){
                 html += ` 
