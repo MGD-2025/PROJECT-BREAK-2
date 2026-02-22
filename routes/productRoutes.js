@@ -21,9 +21,7 @@ router.get ('/dashboard/new', productController.showNewProduct)
 
 
 // GET /dashboard/:productId: Devuelve el detalle de un producto en el dashboard.
-router.get ('/dashboard/:productId', (req, res)=>{
-    res.send ('Ver Producto por Id (admin)')
-})
+router.get ('/dashboard/:productId', productController.showProductAdmin)
 
 // GET /dashboard/:productId/edit: Devuelve el formulario para editar un producto.
 router.get ('/dashboard/:productId/edit', productController.showEditProduct)
@@ -33,5 +31,10 @@ router.post ('/dashboard/update/:productId', productController.updateProduct)
 
 // DELETE /dashboard/:productId/delete: Elimina un producto.
 router.delete ('/dashboard/:productId/delete', productController.deleteProduct)
+
+
+// rutas por categorías
+router.get ('/categoria/:Nombre', productController.showByCategory)
+
 
 module.exports = router

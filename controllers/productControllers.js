@@ -16,7 +16,7 @@ const productController ={
                     <p>${product.Talla}</p>
                     <p>${product.Precio}€</p>
                     <p>${product.Categoría}</p>
-                    <a href="/products/${product._id}">Ver detalle</a>
+                    <a href="/products/${product._id}">Ver</a>
                     </div>
                     `;
     }
@@ -41,7 +41,6 @@ const productController ={
                     <p>${products.Talla}</p>
                     <p>${products.Precio}€</p>
                     <p>${products.Categoría}</p>
-                    <a href="/products/${products._id}">Ver detalle</a>
                     </div>
                     `;
 
@@ -66,7 +65,8 @@ const productController ={
                     <p>${products.Talla}</p>
                     <p>${products.Precio}€</p>
                     <p>${products.Categoría}</p>
-                    <a href="/dasboard/${products._id}">Ver detalle</a>
+                    <a href="/dasboard/${products._id}">Editar</a>
+                    <a href="/dasboard/${products._id}">Borrar</a>
                     </div>
                     `;
 
@@ -140,7 +140,6 @@ const productController ={
             for (let product of products) {
                 html += `
                     <div class="product-card">
-                    
                     <h2>${product.Nombre}</h2>
                     <img src="${product.Imagen}" alt="${product.Nombre}">
                     <p>${product.Descripción}</p>
@@ -227,6 +226,27 @@ const productController ={
         }catch (error){
             console.error(error)
             res.status(500).json('Error al eliminar producto')
+        }
+    },
+
+    showByCategory: async (req, res) =>{
+        try{
+            const categoria = req.params.Nombre
+            const products = await product.find({Categoría:categoria})
+            let html= `<h2>${categoria}</h2>`
+            for (let product of products){
+                html += `
+                <div class = "categorproduct-card">
+                <h2>${products.Nombre}</h2>
+                <img src="${product.Imagen}" alt="${product.Nombre}">
+                <a href="/products/${product._id}">Ver</a>
+                </div>
+                `
+            }
+            res.send (html)
+        }catch (error){
+            console.error (error)
+            res.send('Error')
         }
     }
 }
