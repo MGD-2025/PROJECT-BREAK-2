@@ -231,13 +231,15 @@ const productController ={
 
     showByCategory: async (req, res) =>{
         try{
-            const categoria = req.params.Nombre
-            const products = await product.find({Categoría:categoria})
-            let html= `<h2>${categoria}</h2>`
+            let categoria = req.params.Nombre
+            categoria = categoria.charAt(0).toUpperCase() + categoria.slice(1)
+            const products = await Product.find({Categoría: categoria})
+            let html = getNavBar()
+            html+= `<h2>${categoria}</h1>`
             for (let product of products){
-                html += `
+                html += ` 
                 <div class = "categorproduct-card">
-                <h2>${products.Nombre}</h2>
+                <h2>${product.Nombre}</h2>
                 <img src="${product.Imagen}" alt="${product.Nombre}">
                 <a href="/products/${product._id}">Ver</a>
                 </div>

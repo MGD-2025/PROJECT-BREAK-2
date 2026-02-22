@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const validSize=  ['XS', 'S', 'M', 'L', 'XL'];
-const validCategory = ['Camisetas', 'Pantalones', 'Zapatos', 'Accesorios'];
+const validCategory = ['camisetas', 'pantalones', 'zapatos', 'accesorios'];
 
 const productSchema = new mongoose.Schema({
   Nombre:  { type: String, required: true },
